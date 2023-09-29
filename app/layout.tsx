@@ -4,6 +4,7 @@ import React from "react";
 import { Inter, Space_Grotesk } from "next/font/google";
 import { Metadata } from "next";
 import "./globals.css";
+import { ThemeContextProvider } from "@/constants/ThemeProvider";
 
 const inter = Inter({
   subsets: ["latin", "latin-ext"],
@@ -32,17 +33,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider
-      appearance={{
-        elements: {
-          formButtonPrimary: "primary-gradient",
-          footerActionLink: "primary-text-gradient hoover: text-primary-500 ",
-        },
-      }}
-    >
-      <html lang="en">
-        <body className={`${inter} ${spaceGrotesk}`}>{children}</body>
-      </html>
-    </ClerkProvider>
+    <html lang="en">
+      <body className={`${inter} ${spaceGrotesk}`}>
+        <ClerkProvider
+          appearance={{
+            elements: {
+              formButtonPrimary: "primary-gradient",
+              footerActionLink:
+                "primary-text-gradient hoover: text-primary-500 ",
+            },
+          }}
+        >
+          <ThemeContextProvider>{children}</ThemeContextProvider>
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }
